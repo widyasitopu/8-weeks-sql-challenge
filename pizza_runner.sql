@@ -47,15 +47,6 @@ update customer_orders
 set exclusions = coalesce(nullif(exclusions, 'null'), ''), extras = coalesce(nullif(extras, 'null'), '')
 where exclusions is null or exclusions = 'null' or extras is null or extras = 'null';
 
--- check duplicate value
-select distinct * from customer_orders;
-
--- delete duplicate values
-create table temp_table as select distinct * from customer_orders;
-truncate table customer_orders;
-insert into customer_orders select * from temp_table;
-drop table temp_table;
-
 create table runner_orders(
 	order_id integer,
     runner_id integer,
