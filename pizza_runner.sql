@@ -98,13 +98,25 @@ select * from pizza_names;
 
 create table pizza_recipes(
   pizza_id integer,
-  toppings text
+  toppings integer
 );
 
 insert into pizza_recipes(pizza_id, toppings)
 values
-  (1, '1, 2, 3, 4, 5, 6, 8, 10'),
-  (2, '4, 6, 7, 9, 11, 12');
+  (1, 1),
+  (1, 2),
+  (1, 3),
+  (1, 4),
+  (1, 5),
+  (1, 6),
+  (1, 8),
+  (1, 10),
+  (2, 4),
+  (2, 6),
+  (2, 7),
+  (2, 9),
+  (2, 11),
+  (2, 12);
 
 select * from pizza_recipes;
 
@@ -127,5 +139,3 @@ values
   (10, 'Salami'),
   (11, 'Tomatoes'),
   (12, 'Tomato Sauce');
-  
-select * from pizza_toppings;
