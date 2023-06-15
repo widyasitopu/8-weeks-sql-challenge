@@ -1,7 +1,7 @@
 create schema pizza_runner;
 
 create table runners(
-	runner_id integer,
+    runner_id integer,
     registration_date date
 );
 
@@ -15,7 +15,7 @@ values
 select * from runners;
 
 create table customer_orders(
-	order_id integer,
+    order_id integer,
     customer_id integer,
     pizza_id integer,
     exclusions varchar(10),
@@ -48,7 +48,7 @@ set exclusions = coalesce(nullif(exclusions, 'null'), ''), extras = coalesce(nul
 where exclusions is null or exclusions = 'null' or extras is null or extras = 'null';
 
 create table runner_orders(
-	order_id integer,
+    order_id integer,
     runner_id integer,
     pickup_time datetime,
     distance float,
@@ -82,8 +82,6 @@ update runner_orders
 set cancellation = coalesce(nullif(cancellation, 'null'), '')
 where cancellation is null or cancellation = 'null';
 
-select distinct * from runner_orders;
-
 create table pizza_names(
   pizza_id integer,
   pizza_name text
@@ -95,30 +93,6 @@ values
   (2, 'Vegetarian');
 
 select * from pizza_names;
-
-create table pizza_recipes(
-  pizza_id integer,
-  toppings integer
-);
-
-insert into pizza_recipes(pizza_id, toppings)
-values
-  (1, 1),
-  (1, 2),
-  (1, 3),
-  (1, 4),
-  (1, 5),
-  (1, 6),
-  (1, 8),
-  (1, 10),
-  (2, 4),
-  (2, 6),
-  (2, 7),
-  (2, 9),
-  (2, 11),
-  (2, 12);
-
-select * from pizza_recipes;
 
 create table pizza_toppings(
   topping_id integer,
@@ -139,3 +113,22 @@ values
   (10, 'Salami'),
   (11, 'Tomatoes'),
   (12, 'Tomato Sauce');
+  
+create table pizza_recipes(
+    pizza_id integer,
+    toppings set('1','2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12')
+);
+
+insert into pizza_recipes(pizza_id, toppings)
+values
+  (1, '1,2,3,4,5,6,8,10'),
+  (2, '4,6,7,9,11,12');
+
+select * from pizza_recipes;
+
+select * from pizza_toppings;
+select * from pizza_names;
+select * from pizza_recipes;
+select * from customer_orders;
+select * from runner_orders;
+select * from runners;
