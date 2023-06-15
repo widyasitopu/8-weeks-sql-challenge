@@ -1,7 +1,7 @@
 create schema pizza_runner;
 
 create table runners(
-    runner_id integer,
+	runner_id integer,
     registration_date date
 );
 
@@ -15,11 +15,11 @@ values
 select * from runners;
 
 create table customer_orders(
-    order_id integer,
+	order_id integer,
     customer_id integer,
     pizza_id integer,
-    exclusions varchar(10),
-    extras varchar(10),
+    exclusions set('1','2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'),
+    extras set('1','2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'),
     order_time datetime
 );
 
@@ -36,9 +36,9 @@ values
   ('6', '101', '2', 'null', 'null', '2020-01-08 21:03:13'),
   ('7', '105', '2', 'null', '1', '2020-01-08 21:20:29'),
   ('8', '102', '1', 'null', 'null', '2020-01-09 23:54:33'),
-  ('9', '103', '1', '4', '1, 5', '2020-01-10 11:22:59'),
+  ('9', '103', '1', '4', '1,5', '2020-01-10 11:22:59'),
   ('10', '104', '1', 'null', 'null', '2020-01-11 18:34:49'),
-  ('10', '104', '1', '2, 6', '1, 4', '2020-01-11 18:34:49');
+  ('10', '104', '1', '2,6', '1,4', '2020-01-11 18:34:49');
   
 select * from customer_orders; 
 
@@ -48,7 +48,7 @@ set exclusions = coalesce(nullif(exclusions, 'null'), ''), extras = coalesce(nul
 where exclusions is null or exclusions = 'null' or extras is null or extras = 'null';
 
 create table runner_orders(
-    order_id integer,
+	order_id integer,
     runner_id integer,
     pickup_time datetime,
     distance float,
@@ -95,7 +95,7 @@ values
 select * from pizza_names;
 
 create table pizza_toppings(
-  topping_id integer,
+  topping_id int,
   topping_name text
 );
 
@@ -115,7 +115,7 @@ values
   (12, 'Tomato Sauce');
   
 create table pizza_recipes(
-    pizza_id integer,
+	pizza_id integer,
     toppings set('1','2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12')
 );
 
